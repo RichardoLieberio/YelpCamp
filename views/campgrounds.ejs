@@ -1,0 +1,13 @@
+<%- layout("./templates/boilerplate") %>
+<% campgrounds.forEach(function(campground) { %>
+    <div class="w-75 mx-auto mb-3 card row" style="height: 12rem">
+        <img class="col-4 bg-secondary h-100" src="<%= campground.image[0] %>" alt="Campground image"></img>
+        <div class="col-8">
+            <div class="card-body">
+                <h5 class="card-title text-truncate"><%= campground.name %></h5>
+                <p class="card-text text-height-3"><%= campground.description %></p>
+                <a href="campgrounds/<%= campground._id %>" class="card-link">Details</a>
+            </div>
+        </div>
+    </div>
+<% }) %>

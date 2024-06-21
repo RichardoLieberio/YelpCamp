@@ -1,0 +1,69 @@
+<%- layout("./templates/boilerplate") %>
+<h1><%= campground.name %></h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <img class="card-img-top .bg-secondary" src="data:image/jpeg;base64,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" alt="Campground images">
+                <div class="card-body">
+                    <p class="card-text"><%= campground.description %></p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-0">
+                            <div class="d-flex justify-content-between">
+                                <p><%= campground.location %></p>
+                                <p>$ <%= campground.price %></p>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-0 mt-3">
+                            <form action="/campgrounds/<%= campground._id %>?_method=delete" method="post" class="d-flex justify-content-end align-items-center">
+                                <a href="/campgrounds/<%= campground._id %>/edit" class="card-link">Edit</a>
+                                <button class="btn btn-danger ms-3">Delete</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <form action="/campgrounds/<%= campground._id %>/review" method="post" autocomplete="off">
+                <div class="form-group mb-3">
+                    <label class="form-label" for="rating">Add review</label>
+                    <input type="range" class="form-range" min="1" max="5" step="1" id="rating" name="rating">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" for="review">Add review</label>
+                    <textarea class="form-control" rows="5" name="review" id="review" placeholder="Write your review"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-0 d-flex justify-content-between">
+                            <h5 class="card-title">All Reviews</h5>
+                            <% if(campground.overAllRating == 0) { %>
+                                <p>No Rating</p>
+                            <% } else { %>
+                                <p>Rating <%= campground.overAllRating %></p>
+                            <% } %>
+                        </li>
+                        <% if(campground.reviewsId.length) { %>
+                            <% campground.reviewsId.reverse() %>
+                            <% campground.reviewsId.forEach(function(review) { %>
+                                <li class="list-group-item p-0 pt-3 pb-3">
+                                    <h6 class="card-subtitle mb-2">Rating: <%= review.rating %></h6>
+                                    <p class="card-text"><%= review.review %></p>
+                                </li>
+                            <% }) %>
+                        <% } else { %>
+                            <li class="list-group-item p-0 pt-3 pb-3">
+                                <h6 class="card-subtitle mb-2 text-muted">No review yet</h6>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

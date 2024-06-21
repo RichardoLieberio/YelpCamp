@@ -1,0 +1,26 @@
+<%- layout("./templates/boilerplate") %>
+<div class="row">
+    <h1 class="text-center">Edit Campground</h1>
+    <form class="w-50 mx-auto" action="/campgrounds/<%= campground._id %>?_method=put" method="post" autocomplete="off">
+        <div class="form-group mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter campground name" value="<%= campground.name %>">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" for="location">Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Enter campground location" value="<%= campground.location %>">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" for="price">Price</label>
+            <div class="input-group">
+                <span class="input-group-text" id="price-label">$</span>
+                <input type="number" class="form-control hide-arrow" id="price" name="price" step="0.01" placeholder="0.00" aria-label="price" aria-describedby="price-label" value="<%= campground.price %>">
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea class="form-control" rows="5" name="description" id="description" placeholder="Enter campground description"><%= campground.description %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mx-auto">Submit</button>
+    </form>
+</div>
