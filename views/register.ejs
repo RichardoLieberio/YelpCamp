@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Register YelpCamp</title>
+</head>
+<body>
+    <div class="w-100 vh-100 d-flex justify-content-center align-items-center">
+        <form action="register" method="post" style="min-width: 80px" class="container w-25" autocomplete="off">
+            <h1 class="text-center mb-4">Register Form</h1>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="name">Full name</label>
+                <input type="text" id="name" name="name" class="form-control" value="<%= data && data.name ? data.name : "" %>"/>
+                <% if(errors && errors.name) { %>
+                    <small class="form-text text-danger"><%= errors.name %></small>
+                <% } %>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="email">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" value="<%= data && data.email ? data.email : "" %>"/>
+                <% if(errors && errors.email) { %>
+                    <small class="form-text text-danger"><%= errors.email %></small>
+                <% } %>
+                <% if(emailRegistered) { %>
+                    <small class="form-text text-danger"><%= emailRegistered %></small>
+                <% } %>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="pwd">Password</label>
+                <input type="password" id="pwd" name="pwd" class="form-control" value="<%= data && data.pwd ? data.pwd : "" %>"/>
+                <% if(errors && errors.pwd) { %>
+                    <small class="form-text text-danger"><%= errors.pwd %></small>
+                <% } %>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="confirm_pwd">Confirm password</label>
+                <input type="password" id="confirm_pwd" name="confirm_pwd" class="form-control"/>
+                <% if(pwdError) { %>
+                    <small class="form-text text-danger"><%= pwdError %></small>
+                <% } %>
+            </div>
+
+            <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block w-100 mb-4">Register</button>
+
+            <p class="text-center">Already have an account? <a href="login">Login</a></p>
+        </form>
+    </div>
+</body>
+</html>

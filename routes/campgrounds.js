@@ -1,14 +1,24 @@
 const express = require("express");
 const ErrorHandler = require("../utils/error-handler.js");
+const router = express.Router();
+
+const Users = require("../models/users.js");
 const Campgrounds = require("../models/campgrounds.js");
 const Reviews = require("../models/reviews.js");
-const router = express.Router();
+
+router.use(function(req, res, next) {
+    if(req.session.user) {
+        next();
+    } else {
+        res.redirect("/login");
+    }
+})
 
 router.get("/", async function(req, res, next) {
     try {
         const campgrounds = await Campgrounds.find();
         campgrounds.reverse();
-        res.render("campgrounds", {title: "All Campgrounds", active: "campgrounds", campgrounds});
+        res.render("campgrounds", {title: "All Campgrounds", active: "campgrounds", campgrounds, user: req.session.user});
     } catch(err) {
         next(new ErrorHandler());
     }
@@ -16,7 +26,10 @@ router.get("/", async function(req, res, next) {
 
 router.post("/", async function(req, res, next) {
     try {
-        await new Campgrounds(req.body).save();
+        const campground = await new Campgrounds({authorId: req.session.user._id, ...req.body}).save();
+        const user = await Users.findById(req.session.user._id);
+        await user.campgroundsId.push(campground._id);
+        await user.save();
         res.redirect("campgrounds");
     } catch(err) {
         if(err.name === "ValidationError") {
@@ -33,13 +46,13 @@ router.post("/", async function(req, res, next) {
 });
 
 router.get("/add", function(req, res) {
-    res.render("add", {title: "Add New Campground", active: "add"});
+    res.render("add", {title: "Add New Campground", active: "add", user: req.session.user});
 });
 
 router.get("/:id", async function(req, res, next) {
     try {
         const campground = await Campgrounds.findById(req.params.id).populate("reviewsId");
-        res.render("details", {title: "Campground Details", active: "campgrounds", campground});
+        res.render("details", {title: "Campground Details", active: "campgrounds", campground, user: req.session.user});
     } catch(err) {
         next(new ErrorHandler(404, "Not Found", `Can't find campground with id: ${req.params.id}`));
     }
@@ -75,7 +88,7 @@ router.delete("/:id", async function(req, res, next) {
 router.get("/:id/edit", async function(req, res, next) {
     try {
         const campground = await Campgrounds.findById(req.params.id);
-        res.render("edit", {title: "Edit Campground", active: "campgrounds", campground});
+        res.render("edit", {title: "Edit Campground", active: "campgrounds", campground, user: req.session.user});
     } catch(err) {
         next(new ErrorHandler(404, "Not Found", `Can't find campground with id: ${req.params.id}`));
     }

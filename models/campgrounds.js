@@ -1,7 +1,12 @@
 const mongoose = require("./seeds.js");
+const Users = require("./users.js");
 const Reviews = require("./reviews.js");
 
 const campgroundsSchema = mongoose.Schema({
+    authorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    },
     name: {
         type: String,
         maxlength: [50, "Max name length is 50"],

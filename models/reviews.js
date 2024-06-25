@@ -1,6 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require("./seeds.js");
+const Users = require("./users.js");
+const Campgrounds = require("./campgrounds.js");
 
 const reviewsSchema = mongoose.Schema({
+    authorId: {
+        type: String,
+        ref: "user"
+    },
     rating: {
         type: Number,
         min: [1, "Rating must between 1-5"],
